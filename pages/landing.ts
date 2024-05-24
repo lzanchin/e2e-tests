@@ -12,8 +12,7 @@ export class LandingPage {
         this.page = page;
         this.$welcomeModalCloseButton = page.getByLabel('Close');
         this.$welcomePageHeader = page.getByRole('heading', { name: 'Get Started Here' });
-        this.$createNewImageButton = page.getByRole('link', { name: 'Create New Image' });
-        this.$profileMenu = page.getByRole('button', { name: 'Profile' });
+        this.$createNewImageButton = page.getByRole('link', { name: 'Create New Image' });        
         this.$logoutButton = page.getByRole('menuitemradio', { name: 'Sign out Logout' }).locator('a');
     };
 
@@ -24,7 +23,7 @@ export class LandingPage {
     };
 
     async clickProfileMenu(username: string) {
-        await this.page.getByRole('button', { name: `${username} ${username}` }).click();
+        await this.page.getByRole('button', { name: `${username} ${username}` }).click();        
     };
 
     async clickLogoutButton() {

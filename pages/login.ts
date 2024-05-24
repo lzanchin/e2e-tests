@@ -31,7 +31,7 @@ export class LoginPage {
         await this.$loginButton.click();
     };
     
-    // Page Workflows
+    // Page Workflows - makes it easier to write tests and reuse code
 
     async login(username: string, password: string) {
         await this.fillUsername(username);
