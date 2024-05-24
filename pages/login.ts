@@ -16,7 +16,7 @@ export class LoginPage {
     // elements methods and actions
 
     async open(url: string) {        
-        await this.page.goto(url);
+        await this.page.goto(url, { waitUntil: 'load', timeout: 10000 }); // wait until was required for webkit to work
     };
 
     async fillUsername(username: string) {
