@@ -10,12 +10,15 @@ const url = process.env.WEB_URL as string;
 
 test.describe('Login and generate one image based on a prompt', () => {
     test('It should login and generate one image', async ({ page }) => {
-        test.slow();
+        test.slow(); // definying this test as slow to prevent it from timing out as it's a long flow
         let loginPage = new LoginPage(page);
         let landingPage = new LandingPage(page);
         let aiGenerationPage = new AiGenerationPage(page);
 
+        
         // Expected number of images to be generated
+        // the test will compare this number with the number of images that were generated and returned from the page
+        // from the waitForImageAndCountResults method
         let expectedImageCount: number = 1;
 
         // Prompt to be generated with a timestamp to facilitate finding the image
@@ -44,7 +47,7 @@ test.describe('Login and generate one image based on a prompt', () => {
         
         await test.step('Logout', async () => {            
             await aiGenerationPage.clickCloseSettingsButton();
-            await landingPage.logout(username);
+            await landingPage.logout(username); // the username is used to match the button name
         });
     });    
 });

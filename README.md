@@ -62,4 +62,5 @@ With more time, some improvements that I would do to this project:
 - Investigate, improve and add the remaining locators for the number of images, pipeline used, etc using ENUMs or other options
 - Investigate a better way to validate the image created in the test is present (without the use of the timestamp)
 - Improve the logic that compares the quantity of images generated to be more dynamic
+- Improve the way to identify the profile button for logout to dynamically gets the text
 - Move the instances of the classes to a custom fixture to clean up even more the test spec file

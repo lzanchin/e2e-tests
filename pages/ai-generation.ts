@@ -53,7 +53,7 @@ export class AiGenerationPage {
         await this.$alchemyToggleButton.click();
         // if alchemy trial is expired, click on the close button to close the modal
         try {
-            await this.$alchemyTrialExpiredCloseButton.click( { timeout: 10000 } );
+            await this.$alchemyTrialExpiredCloseButton.click( { timeout: 10000 } ); //can potentially reduce this timeout for a shorter number
         } catch (error) {
             console.log(`No modal to close ${error}`);            
         };        
