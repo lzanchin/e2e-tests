@@ -12,10 +12,20 @@ test.describe('Login and generate one image based on a prompt', () => {
     test('It should login and generate one image', async ({ page }) => {
         test.slow();
         let loginPage = new LoginPage(page);
+        let landingPage = new LandingPage(page);
         
         await test.step('Login to Leonardo', async () => {
             await loginPage.open(url);
-            await loginPage.login(username, password);
+            await loginPage.login(email, password);
+        });
+
+        await test.step('Navigate to Image Generation', async () => {
+            expect(await landingPage.checkLandingPage()).toBeTruthy();
+            await landingPage.navigateToImageGeneration();
+        });
+
+        await test.step('Logout', async () => {
+            await landingPage.logout(username);
         });
     });    
 });
