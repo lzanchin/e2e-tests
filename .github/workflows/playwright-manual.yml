@@ -1,0 +1,42 @@
+name: Run Playwright Tests Manually
+
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+    inputs:
+      browser:
+        description: 'Browser to run tests on (e.g., chromium, firefox, webkit)'
+        required: false
+        default: 'chromium'
+      headless:
+        description: 'Run tests in headless mode?'
+        required: false
+        default: 'true'
+      branch:
+        description: 'Branch to run the tests on'
+        required: false
+        default: 'main'
+
+jobs:
+  run-playwright-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]  # You can adjust the node versions
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Playwright tests
+        run: |
+          npx playwright install-deps
+          npx playwright test --browser=${{ github.event.inputs.browser }} --headed=${{ github.event.inputs.headless == 'true' }}

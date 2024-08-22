@@ -5,7 +5,7 @@ export class LandingPage {
     readonly $welcomeModalCloseButton: Locator;
     readonly $welcomePageHeader: Locator;
     readonly $createNewImageButton: Locator;
-    readonly $profileMenu: Locator;
+    //readonly $profileMenu: Locator;
     readonly $logoutButton: Locator;
 
     constructor (page: Page) {

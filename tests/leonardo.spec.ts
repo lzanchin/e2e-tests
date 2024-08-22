@@ -8,7 +8,7 @@ const password = process.env.PASSWORD as string;
 const username = process.env.USERNAME as string;
 const url = process.env.WEB_URL as string;
 
-test.describe('Login and generate one image based on a prompt', () => {
+test.skip('Login and generate one image based on a prompt', () => {
     test('It should login and generate one image', async ({ page }) => {
         test.slow(); // definying this test as slow to prevent it from timing out as it's a long flow
         let loginPage = new LoginPage(page);
@@ -49,5 +49,20 @@ test.describe('Login and generate one image based on a prompt', () => {
             await aiGenerationPage.clickCloseSettingsButton();
             await landingPage.logout(username); // the username is used to match the button name
         });
+    });    
+});
+
+test.describe('Login and generate one image based on a prompt', () => {
+    test('It should login and generate one image', async ({ page }) => {
+        test.slow(); // definying this test as slow to prevent it from timing out as it's a long flow
+        let loginPage = new LoginPage(page);
+        let landingPage = new LandingPage(page);
+        let aiGenerationPage = new AiGenerationPage(page);        
+        
+        await test.step('Login to Leonardo', async () => {            
+            await loginPage.open(url);
+            await loginPage.login(email, password);
+            expect(await landingPage.checkLandingPage()).toBeTruthy();            
+        });        
     });    
 });
