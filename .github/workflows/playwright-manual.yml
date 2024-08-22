@@ -39,4 +39,4 @@ jobs:
       - name: Run Playwright tests
         run: |
           npx playwright install-deps
-          npx playwright test --browser=${{ github.event.inputs.browser }} --headed=${{ github.event.inputs.headless == 'true' }}
+          npx playwright test --browser=${{ github.event.inputs.browser }}
