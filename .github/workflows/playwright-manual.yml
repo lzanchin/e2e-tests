@@ -2,7 +2,41 @@ name: end-to-end-tests
 
 on:  
   workflow_dispatch:
-
+    inputs:
+      workers:
+        description: 'Number of parallel workers'
+        type: choice
+        required: true
+        default: '1'
+        options:
+          - 1
+          - 2
+          - 4
+      environment:
+        description: 'Environment'
+        type: choice
+        required: true
+        default: 'local'
+        options:
+          - local
+          - ci
+          - prod
+      test-name:
+        description: 'Test name'
+        type: choice
+        required: true
+        options:
+          - './tests/leonardo.spec.ts'
+          - 'image-generation.spec.ts'
+      browser:
+        description: 'Browser'
+        type: choice
+        required: true
+        default: 'chromium'
+        options:
+          - 'chromium'
+          - 'firefox'
+          - 'webkit'
 jobs:
   run-playwright-tests:
     timeout-minutes: 60
@@ -20,7 +54,7 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npx playwright test
+        run: WEB_URL="\${{ vars.WEB_URL }}\" npx playwright test ${{ inputs.test-name }} --project=${{ inputs.browser }} --workers=${{ inputs.workers }}
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
