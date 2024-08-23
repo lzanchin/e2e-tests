@@ -54,7 +54,7 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: WEB_URL="\${{ vars.WEB_URL }}\" npx playwright test ${{ inputs.test-name }} --project=${{ inputs.browser }} --workers=${{ inputs.workers }}
+        run: WEB_URL="\${{ env.WEB_URL }}\" npx playwright test ${{ inputs.test-name }} --project=${{ inputs.browser }} --workers=${{ inputs.workers }}
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
